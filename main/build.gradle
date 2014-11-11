@@ -1,0 +1,47 @@
+import com.raniejaderamiso.AptPlugin
+import com.raniejaderamiso.BuildConfigPlugin
+
+apply plugin: 'java'
+
+apply plugin: AptPlugin
+
+apply plugin: BuildConfigPlugin
+
+apply plugin:'application'
+
+apply plugin: 'idea'
+
+mainClassName = "com.raniejaderamiso.Test"
+
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+buildConfig {
+    packageName "com.raniejaderamiso"
+
+    config "int", "APP_ID", "123"
+}
+
+sourceSets {
+    main {
+        java.srcDirs += "$projectDir/generated/java"
+    }
+}
+
+dependencies {
+    compile "com.squareup.dagger:dagger:1.2.2"
+
+    apt "com.squareup.dagger:dagger-compiler:1.2.2"
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+idea {
+    module {
+        sourceDirs += file("$projectDir/generated/java")
+        sourceDirs += file("$projectDir/generated/apt")
+    }
+}

@@ -1,0 +1,11 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    gradleApi()
+
+    compile "com.squareup:javawriter:2.5.0"
+}
